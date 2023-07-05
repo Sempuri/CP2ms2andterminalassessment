@@ -5,24 +5,31 @@
 package frames;
 
 import classes.Employee;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 import com.opencsv.exceptions.CsvValidationException;
+import java.util.List;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import java.io.FileReader;
+import java.util.ArrayList;
+
 
 /**
  *
  * @author DREAM PC
  */
 public class FrmMainMenu extends javax.swing.JDialog {
-private javax.swing.JTable tblEmployee;
     /**
      * Creates new form FrmMainMenu
      */
     public FrmMainMenu() {
         this.setModalityType(ModalityType.APPLICATION_MODAL);
         initComponents();
-        tblEmployee = new javax.swing.JTable();  // Initialize tblEmployee
+        
     }
 
     /**
@@ -147,65 +154,257 @@ private javax.swing.JTable tblEmployee;
         _addEmployee.setVisible(true);
         String csvFilename = "Employees.csv";
         Employee _employee = new Employee();
-        tblEmployee.setModel(_employee.FetchEmployees(csvFilename));
+        try {
+            tblEmployee.setModel((TableModel) _employee.FetchEmployees(csvFilename));
+        } catch (IOException | CsvValidationException ex) {
+            Logger.getLogger(FrmMainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_AddEmployee
     //Event Handler Method to show the employee records inside the table as soon as the window is opened
     private void LoadEmployees(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_LoadEmployees
         String csvFilename = "Employees.csv";
         Employee _employee = new Employee();
-        tblEmployee.setModel(_employee.FetchEmployees(csvFilename));
+        try {
+            tblEmployee.setModel((TableModel) _employee.FetchEmployees(csvFilename));
+        } catch (IOException | CsvValidationException ex) {
+            Logger.getLogger(FrmMainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_LoadEmployees
     
     //Event Handler Method for Update Employee button
     private void UpdateEmployee(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateEmployee
+        if (tblEmployee.getSelectedRow() != -1) {
+        DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
         Employee _employee = new Employee();
-        _employee.SetEmployeeNo(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 0).toString());
-        _employee.SetLastName(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 1).toString());
-        _employee.SetFirstName(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 2).toString());
-        _employee.SetSSSNo(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 3).toString());
-        _employee.SetPhealthNo(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 4).toString());
-        _employee.SetTinNo(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 5).toString());
-        _employee.SetPagibigNo(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 6).toString());
-      
-        FrmEditEmployee _editEmployee = new FrmEditEmployee(_employee);
-        _editEmployee.pack();
-        _editEmployee.setVisible(true);
-        String csvFilename = "Employees.csv"; //para mag update din yung table pag inedit yung employee records
-        tblEmployee.setModel(_employee.FetchEmployees(csvFilename));
+        _employee.SetEmployeeNo(model.getValueAt(tblEmployee.getSelectedRow(), 0).toString());
+        _employee.SetLastName(model.getValueAt(tblEmployee.getSelectedRow(), 1).toString());
+        _employee.SetFirstName(model.getValueAt(tblEmployee.getSelectedRow(), 2).toString());
+        _employee.SetSSSNo(model.getValueAt(tblEmployee.getSelectedRow(), 3).toString());
+        _employee.SetPhealthNo(model.getValueAt(tblEmployee.getSelectedRow(), 4).toString());
+        _employee.SetTinNo(model.getValueAt(tblEmployee.getSelectedRow(), 5).toString());
+        _employee.SetPagibigNo(model.getValueAt(tblEmployee.getSelectedRow(), 6).toString());
+
+        String csvFilename = "Employees.csv";
+
+        try (CSVReader reader = new CSVReader(new FileReader(csvFilename))) {
+            List<String[]> rows = null;
+            try {
+                rows = reader.readAll();
+            } catch (CsvException ex) {
+                Logger.getLogger(FrmMainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            List<Employee> employees = new ArrayList<>();
+
+            // Skip the header row
+            for (int i = 1; i < rows.size(); i++) {
+                String[] row = rows.get(i);
+                Employee employee = new Employee();
+                employee.SetEmployeeNo(row[0]);
+                employee.SetLastName(row[1]);
+                employee.SetFirstName(row[2]);
+                employee.SetBirthday(row[3]);
+                employee.SetAddress(row[4]);
+                employee.SetPhoneNumber(row[5]);
+                employee.SetSSSNo(row[6]);
+                employee.SetPhealthNo(row[7]);
+                employee.SetTinNo(row[8]);
+                employee.SetPagibigNo(row[9]);
+                employee.SetStatus(row[10]);
+                employee.SetPosition(row[11]);
+                employee.SetImmediateSup(row[12]);
+                employee.SetBasicSalary(row[13]);
+                employee.SetRiceSubsidy(row[14]);
+                employee.SetPhoneAllowance(row[15]);
+                employee.SetClothingAllowance(row[16]);
+                employee.SetGrossSemiMonthlyRate(row[17]);
+                employee.SetHourlyRate(row[18]);
+                
+                employees.add(employee);
+            }
+
+            if (tblEmployee.getSelectedRow() < employees.size()) {
+                Employee selectedEmployee = employees.get(tblEmployee.getSelectedRow());
+                _employee.SetBirthday(selectedEmployee.GetBirthday());
+                _employee.SetAddress(selectedEmployee.GetAddress());
+                _employee.SetStatus(selectedEmployee.GetStatus());
+                _employee.SetPosition(selectedEmployee.GetPosition());
+                _employee.SetImmediateSup(selectedEmployee.GetImmediateSup());
+                _employee.SetBasicSalary(selectedEmployee.GetBasicSalary());
+                _employee.SetRiceSubsidy(selectedEmployee.GetRiceSubsidy());
+                _employee.SetPhoneAllowance(selectedEmployee.GetPhoneAllowance());
+                _employee.SetClothingAllowance(selectedEmployee.GetClothingAllowance());
+                _employee.SetGrossSemiMonthlyRate(selectedEmployee.GetGrossSemiMonthlyRate());
+                _employee.SetHourlyRate(selectedEmployee.GetHourlyRate());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FrmMainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+            
+            FrmEditEmployee _editEmployee = new FrmEditEmployee(_employee);
+            _editEmployee.pack();
+            _editEmployee.setVisible(true);
+        }
     }//GEN-LAST:event_UpdateEmployee
 
     //Event Handler Method for Delete Employee Button
     private void DeleteEmployee(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteEmployee
+       if (tblEmployee.getSelectedRow() != -1) {
+        DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
         Employee _employee = new Employee();
-        _employee.SetEmployeeNo(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 0).toString());
-        _employee.SetLastName(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 1).toString());
-        _employee.SetFirstName(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 2).toString());
-        _employee.SetSSSNo(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 3).toString());
-        _employee.SetPhealthNo(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 4).toString());
-        _employee.SetTinNo(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 5).toString());
-        _employee.SetPagibigNo(tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 6).toString());
-        
+        _employee.SetEmployeeNo(model.getValueAt(tblEmployee.getSelectedRow(), 0).toString());
+        _employee.SetLastName(model.getValueAt(tblEmployee.getSelectedRow(), 1).toString());
+        _employee.SetFirstName(model.getValueAt(tblEmployee.getSelectedRow(), 2).toString());
+        _employee.SetSSSNo(model.getValueAt(tblEmployee.getSelectedRow(), 3).toString());
+        _employee.SetPhealthNo(model.getValueAt(tblEmployee.getSelectedRow(), 4).toString());
+        _employee.SetTinNo(model.getValueAt(tblEmployee.getSelectedRow(), 5).toString());
+        _employee.SetPagibigNo(model.getValueAt(tblEmployee.getSelectedRow(), 6).toString());
+
+        String csvFilename = "Employees.csv";
+
+        try (CSVReader reader = new CSVReader(new FileReader(csvFilename))) {
+            List<String[]> rows = null;
+            try {
+                rows = reader.readAll();
+            } catch (CsvException ex) {
+                Logger.getLogger(FrmMainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            List<Employee> employees = new ArrayList<>();
+
+            // Skip the header row
+            for (int i = 1; i < rows.size(); i++) {
+                String[] row = rows.get(i);
+                Employee employee = new Employee();
+                employee.SetEmployeeNo(row[0]);
+                employee.SetLastName(row[1]);
+                employee.SetFirstName(row[2]);
+                employee.SetBirthday(row[3]);
+                employee.SetAddress(row[4]);
+                employee.SetPhoneNumber(row[5]);
+                employee.SetSSSNo(row[6]);
+                employee.SetPhealthNo(row[7]);
+                employee.SetTinNo(row[8]);
+                employee.SetPagibigNo(row[9]);
+                employee.SetStatus(row[10]);
+                employee.SetPosition(row[11]);
+                employee.SetImmediateSup(row[12]);
+                employee.SetBasicSalary(row[13]);
+                employee.SetRiceSubsidy(row[14]);
+                employee.SetPhoneAllowance(row[15]);
+                employee.SetClothingAllowance(row[16]);
+                employee.SetGrossSemiMonthlyRate(row[17]);
+                employee.SetHourlyRate(row[18]);
+                
+                employees.add(employee);
+            }
+
+            if (tblEmployee.getSelectedRow() < employees.size()) {
+                Employee selectedEmployee = employees.get(tblEmployee.getSelectedRow());
+                _employee.SetBirthday(selectedEmployee.GetBirthday());
+                _employee.SetAddress(selectedEmployee.GetAddress());
+                _employee.SetStatus(selectedEmployee.GetStatus());
+                _employee.SetPosition(selectedEmployee.GetPosition());
+                _employee.SetImmediateSup(selectedEmployee.GetImmediateSup());
+                _employee.SetBasicSalary(selectedEmployee.GetBasicSalary());
+                _employee.SetRiceSubsidy(selectedEmployee.GetRiceSubsidy());
+                _employee.SetPhoneAllowance(selectedEmployee.GetPhoneAllowance());
+                _employee.SetClothingAllowance(selectedEmployee.GetClothingAllowance());
+                _employee.SetGrossSemiMonthlyRate(selectedEmployee.GetGrossSemiMonthlyRate());
+                _employee.SetHourlyRate(selectedEmployee.GetHourlyRate());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FrmMainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         FrmDeleteEmployee _delete = new FrmDeleteEmployee(_employee);
         _delete.setVisible(true);
-        String csvFilename = "Employees.csv"; //para mag update din yung table pag inedit yung employee records
-        tblEmployee.setModel(_employee.FetchEmployees(csvFilename));
+    }
+
     }//GEN-LAST:event_DeleteEmployee
 
     //Event Handler Method for View Payroll Detail Button
     private void ViewPayrollDetails(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewPayrollDetails
-        String _selectedEmployeeNo = tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 0).toString();
-        String _selectedLastName = tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 1).toString();
-        String _selectedFirstName = tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 2).toString();
-        FrmViewPayroll _view = new FrmViewPayroll(_selectedEmployeeNo, _selectedLastName, _selectedFirstName);
-        _view.setVisible(true);
+        if (tblEmployee.getSelectedRow() != -1) {
+            String _selectedEmployeeNo = tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 0).toString();
+            String _selectedLastName = tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 1).toString();
+            String _selectedFirstName = tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 2).toString();
+            FrmViewPayroll _view = new FrmViewPayroll(_selectedEmployeeNo, _selectedLastName, _selectedFirstName);
+            _view.setVisible(true);
+        }
     }//GEN-LAST:event_ViewPayrollDetails
 
     //Event Handler Method for View Employee Record
     private void ViewEmployee(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewEmployee
-        String _selectedEmployeeNo = tblEmployee.getModel().getValueAt(tblEmployee.getSelectedRow(), 0).toString();
-        FrmViewEmployee _view = new FrmViewEmployee(_selectedEmployeeNo);
+         if (tblEmployee.getSelectedRow() != -1) {
+        DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
+        Employee _employee = new Employee();
+        _employee.SetEmployeeNo(model.getValueAt(tblEmployee.getSelectedRow(), 0).toString());
+        _employee.SetLastName(model.getValueAt(tblEmployee.getSelectedRow(), 1).toString());
+        _employee.SetFirstName(model.getValueAt(tblEmployee.getSelectedRow(), 2).toString());
+        _employee.SetSSSNo(model.getValueAt(tblEmployee.getSelectedRow(), 3).toString());
+        _employee.SetPhealthNo(model.getValueAt(tblEmployee.getSelectedRow(), 4).toString());
+        _employee.SetTinNo(model.getValueAt(tblEmployee.getSelectedRow(), 5).toString());
+        _employee.SetPagibigNo(model.getValueAt(tblEmployee.getSelectedRow(), 6).toString());
+
+        String csvFilename = "Employees.csv";
+
+        try (CSVReader reader = new CSVReader(new FileReader(csvFilename))) {
+            List<String[]> rows = null;
+            try {
+                rows = reader.readAll();
+            } catch (CsvException ex) {
+                Logger.getLogger(FrmMainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            List<Employee> employees = new ArrayList<>();
+
+            // Skip the header row
+            for (int i = 1; i < rows.size(); i++) {
+                String[] row = rows.get(i);
+                Employee employee = new Employee();
+                employee.SetEmployeeNo(row[0]);
+                employee.SetLastName(row[1]);
+                employee.SetFirstName(row[2]);
+                employee.SetBirthday(row[3]);
+                employee.SetAddress(row[4]);
+                employee.SetPhoneNumber(row[5]);
+                employee.SetSSSNo(row[6]);
+                employee.SetPhealthNo(row[7]);
+                employee.SetTinNo(row[8]);
+                employee.SetPagibigNo(row[9]);
+                employee.SetStatus(row[10]);
+                employee.SetPosition(row[11]);
+                employee.SetImmediateSup(row[12]);
+                employee.SetBasicSalary(row[13]);
+                employee.SetRiceSubsidy(row[14]);
+                employee.SetPhoneAllowance(row[15]);
+                employee.SetClothingAllowance(row[16]);
+                employee.SetGrossSemiMonthlyRate(row[17]);
+                employee.SetHourlyRate(row[18]);
+                
+                employees.add(employee);
+            }
+
+            if (tblEmployee.getSelectedRow() < employees.size()) {
+                Employee selectedEmployee = employees.get(tblEmployee.getSelectedRow());
+                _employee.SetBirthday(selectedEmployee.GetBirthday());
+                _employee.SetAddress(selectedEmployee.GetAddress());
+                _employee.SetStatus(selectedEmployee.GetStatus());
+                _employee.SetPosition(selectedEmployee.GetPosition());
+                _employee.SetImmediateSup(selectedEmployee.GetImmediateSup());
+                _employee.SetBasicSalary(selectedEmployee.GetBasicSalary());
+                _employee.SetRiceSubsidy(selectedEmployee.GetRiceSubsidy());
+                _employee.SetPhoneAllowance(selectedEmployee.GetPhoneAllowance());
+                _employee.SetClothingAllowance(selectedEmployee.GetClothingAllowance());
+                _employee.SetGrossSemiMonthlyRate(selectedEmployee.GetGrossSemiMonthlyRate());
+                _employee.SetHourlyRate(selectedEmployee.GetHourlyRate());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FrmMainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        FrmViewEmployee _view = new FrmViewEmployee(_employee);
         _view.setVisible(true);
-    }       
+    }
     }//GEN-LAST:event_ViewEmployee
 
     /**

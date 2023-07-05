@@ -4,29 +4,39 @@
  */
 package frames;
 import classes.Employee; //to access the necessary properties of the Employee class
-import com.opencsv.exceptions.CsvValidationException;
 import java.awt.Dialog;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author DREAM PC
  */
 public class FrmViewEmployee extends javax.swing.JDialog {
-private String EmployeeNo;
+
     /**
      * Creates new form FrmViewEmployee
      */
-   
-    public FrmViewEmployee(String EmpNo) {
-        setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-             initComponents();
-             EmployeeNo = EmpNo;
+    public FrmViewEmployee(Employee _employee) {
+        initComponents();
+                setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                    txtEmployeeNo.setText(_employee.GetEmployeeNo());
+                    txtLastName.setText(_employee.GetLastName());
+                    txtFirstName.setText(_employee.GetFirstName());
+                    txtBirthday.setText(_employee.GetBirthday());
+                    txtAddress.setText(_employee.GetAddress());
+                    txtSSSNo.setText(_employee.GetSSSNo());
+                    txtPhealthNo.setText(_employee.GetPhealthNo());
+                    txtTinNo.setText(_employee.GetTinNo());
+                    txtPagibigNo.setText(_employee.GetPagibigNo());
+                    txtStatus.setText(_employee.GetStatus());
+                    txtPosition.setText(_employee.GetPosition());
+                    txtImmediateSup.setText(_employee.GetImmediateSup());
+                    txtBasicSalary.setText(_employee.GetBasicSalary());
+                    txtRiceSubsidy.setText(_employee.GetRiceSubsidy());
+                    txtPhoneAllowance.setText(_employee.GetPhoneAllowance());
+                    txtClothingAllowance.setText(_employee.GetClothingAllowance());
+                    txtGrossSemiMonthlyRate.setText(_employee.GetGrossSemiMonthlyRate());
+                    txtHourlyRate.setText(_employee.GetHourlyRate());
     }
-
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,70 +46,53 @@ private String EmployeeNo;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtPosition = new javax.swing.JTextField();
-        lblImmediateSup = new javax.swing.JLabel();
-        txtEmployeeNo = new javax.swing.JTextField();
-        txtImmediateSup = new javax.swing.JTextField();
-        lblLastName = new javax.swing.JLabel();
-        lblBasicSalary = new javax.swing.JLabel();
-        txtLastName = new javax.swing.JTextField();
-        lblRiceSubsidy = new javax.swing.JLabel();
-        lblFirstName = new javax.swing.JLabel();
-        lblPhoneAllowance = new javax.swing.JLabel();
+        txtPhealthNo = new javax.swing.JTextField();
+        lblTinNo = new javax.swing.JLabel();
+        txtTinNo = new javax.swing.JTextField();
+        lblPagibigNo = new javax.swing.JLabel();
         txtFirstName = new javax.swing.JTextField();
         lblSSSNo = new javax.swing.JLabel();
         txtSSSNo = new javax.swing.JTextField();
         lblPhealthNo = new javax.swing.JLabel();
+        txtPagibigNo = new javax.swing.JTextField();
+        lblBirthday = new javax.swing.JLabel();
+        txtBirthday = new javax.swing.JTextField();
+        lblAddress = new javax.swing.JLabel();
+        txtAddress = new javax.swing.JTextField();
+        lblEmployeeNo = new javax.swing.JLabel();
+        txtEmployeeNo = new javax.swing.JTextField();
+        lblLastName = new javax.swing.JLabel();
+        txtLastName = new javax.swing.JTextField();
+        lblFirstName = new javax.swing.JLabel();
+        lblRiceSubsidy = new javax.swing.JLabel();
+        lblPhoneAllowance = new javax.swing.JLabel();
         lblClothingAllowance = new javax.swing.JLabel();
         lblgrossSemiMonthlyRate = new javax.swing.JLabel();
         lblHourlyRate = new javax.swing.JLabel();
         txtBasicSalary = new javax.swing.JTextField();
-        txtPhealthNo = new javax.swing.JTextField();
         txtRiceSubsidy = new javax.swing.JTextField();
-        lblTinNo = new javax.swing.JLabel();
         txtPhoneAllowance = new javax.swing.JTextField();
-        txtTinNo = new javax.swing.JTextField();
         txtClothingAllowance = new javax.swing.JTextField();
-        lblPagibigNo = new javax.swing.JLabel();
         txtGrossSemiMonthlyRate = new javax.swing.JTextField();
-        txtPagibigNo = new javax.swing.JTextField();
         txtHourlyRate = new javax.swing.JTextField();
-        lblBirthday = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
-        txtBirthday = new javax.swing.JTextField();
         txtStatus = new javax.swing.JTextField();
-        lblAddress = new javax.swing.JLabel();
         lblPosition = new javax.swing.JLabel();
-        txtAddress = new javax.swing.JTextField();
-        lblEmployeeNo = new javax.swing.JLabel();
-        btnClose = new javax.swing.JButton();
+        txtPosition = new javax.swing.JTextField();
+        lblImmediateSup = new javax.swing.JLabel();
+        txtImmediateSup = new javax.swing.JTextField();
+        lblBasicSalary = new javax.swing.JLabel();
+        btnClose4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                GetEmployeeRecord(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        txtPosition.setEditable(false);
+        txtPhealthNo.setEditable(false);
 
-        lblImmediateSup.setText("Immediate Supervisor:");
+        lblTinNo.setText("TIN No.:");
 
-        txtEmployeeNo.setEditable(false);
+        txtTinNo.setEditable(false);
 
-        txtImmediateSup.setEditable(false);
-
-        lblLastName.setText("Last Name:");
-
-        lblBasicSalary.setText("Basic Salary:");
-
-        txtLastName.setEditable(false);
-
-        lblRiceSubsidy.setText("Rice Subsidy:");
-
-        lblFirstName.setText("First Name:");
-
-        lblPhoneAllowance.setText("Phone Allowance:");
+        lblPagibigNo.setText("Pagibig No.:");
 
         txtFirstName.setEditable(false);
 
@@ -109,6 +102,30 @@ private String EmployeeNo;
 
         lblPhealthNo.setText("PhilHealth No.:");
 
+        txtPagibigNo.setEditable(false);
+
+        lblBirthday.setText("Birthday:");
+
+        txtBirthday.setEditable(false);
+
+        lblAddress.setText("Address:");
+
+        txtAddress.setEditable(false);
+
+        lblEmployeeNo.setText("Employee No.:");
+
+        txtEmployeeNo.setEditable(false);
+
+        lblLastName.setText("Last Name:");
+
+        txtLastName.setEditable(false);
+
+        lblFirstName.setText("First Name:");
+
+        lblRiceSubsidy.setText("Rice Subsidy:");
+
+        lblPhoneAllowance.setText("Phone Allowance:");
+
         lblClothingAllowance.setText("Clothing Allowance:");
 
         lblgrossSemiMonthlyRate.setText("Gross Semi Monthly Rate:");
@@ -117,46 +134,34 @@ private String EmployeeNo;
 
         txtBasicSalary.setEditable(false);
 
-        txtPhealthNo.setEditable(false);
-
         txtRiceSubsidy.setEditable(false);
-
-        lblTinNo.setText("TIN No.:");
 
         txtPhoneAllowance.setEditable(false);
 
-        txtTinNo.setEditable(false);
-
         txtClothingAllowance.setEditable(false);
-
-        lblPagibigNo.setText("Pagibig No.:");
 
         txtGrossSemiMonthlyRate.setEditable(false);
 
-        txtPagibigNo.setEditable(false);
-
         txtHourlyRate.setEditable(false);
-
-        lblBirthday.setText("Birthday:");
 
         lblStatus.setText("Status:");
 
-        txtBirthday.setEditable(false);
-
         txtStatus.setEditable(false);
-
-        lblAddress.setText("Address:");
 
         lblPosition.setText("Position:");
 
-        txtAddress.setEditable(false);
+        txtPosition.setEditable(false);
 
-        lblEmployeeNo.setText("Employee No.:");
+        lblImmediateSup.setText("Immediate Supervisor:");
 
-        btnClose.setText("Close");
-        btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtImmediateSup.setEditable(false);
+
+        lblBasicSalary.setText("Basic Salary:");
+
+        btnClose4.setText("Close");
+        btnClose4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCloseFrameClose(evt);
+                btnClose4FrameClose(evt);
             }
         });
 
@@ -165,7 +170,7 @@ private String EmployeeNo;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +198,7 @@ private String EmployeeNo;
                             .addComponent(txtPhealthNo, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPagibigNo)
                             .addComponent(txtSSSNo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(53, 53, 53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,53 +226,17 @@ private String EmployeeNo;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtGrossSemiMonthlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtHourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnClose)
-                .addGap(41, 41, 41))
+                .addComponent(btnClose4)
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEmployeeNo)
-                            .addComponent(txtEmployeeNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblLastName)
-                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFirstName)
-                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblBirthday))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblAddress)
-                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblSSSNo)
-                            .addComponent(txtSSSNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPhealthNo)
-                            .addComponent(txtPhealthNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTinNo)
-                            .addComponent(txtTinNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPagibigNo)
-                            .addComponent(txtPagibigNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -311,51 +280,59 @@ private String EmployeeNo;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblHourlyRate)
-                                    .addComponent(txtHourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                .addComponent(btnClose)
-                .addGap(31, 31, 31))
+                                    .addComponent(txtHourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEmployeeNo)
+                            .addComponent(txtEmployeeNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblLastName)
+                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFirstName)
+                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBirthday))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAddress)
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSSSNo)
+                            .addComponent(txtSSSNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPhealthNo)
+                            .addComponent(txtPhealthNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTinNo)
+                            .addComponent(txtTinNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPagibigNo)
+                            .addComponent(txtPagibigNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addComponent(btnClose4)
+                .addGap(32, 32, 32))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCloseFrameClose(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseFrameClose
+    private void btnClose4FrameClose(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClose4FrameClose
         this.dispose();
-    }//GEN-LAST:event_btnCloseFrameClose
-
-    private void GetEmployeeRecord(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_GetEmployeeRecord
-        Employee _employee = new Employee();
-        try {
-            _employee = _employee.GetEmployeeRecords(EmployeeNo);
-        } catch (IOException | CsvValidationException ex) {
-            Logger.getLogger(FrmViewEmployee.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            /**txtEmployeeNo.setText(_employee.GetEmployeeNo());
-            txtLastName.setText(_employee.GetLastName());
-            txtFirstName.setText(_employee.GetFirstName());
-            txtBirthday.setText(_employee.GetBirthday());
-            txtAddress.setText(_employee.GetAddress());
-            txtSSSNo.setText(_employee.GetSSSNo());
-            txtPhealthNo.setText(_employee.GetPhealthNo());
-            txtTinNo.setText(_employee.GetTinNo());
-            txtPagibigNo.setText(_employee.GetPagibigNo());
-            txtStatus.setText(_employee.GetStatus());
-            txtPosition.setText(_employee.GetPosition());
-            txtImmediateSup.setText(_employee.GetImmediateSup());
-            txtBasicSalary.setText(_employee.GetBasicSalary());
-            txtRiceSubsidy.setText(_employee.GetRiceSubsidy());
-            txtPhoneAllowance.setText(_employee.GetPhoneAllowance());
-            txtClothingAllowance.setText(_employee.GetClothingAllowance());
-            txtGrossSemiMonthlyRate.setText(_employee.GetGrossSemiMonthlyRate());
-            txtHourlyRate.setText(_employee.GetHourlyRate());
-    }              
-    }//GEN-LAST:event_GetEmployeeRecord
+    }//GEN-LAST:event_btnClose4FrameClose
 
     /**
      * @param args the command line arguments
      */
-    //public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -380,15 +357,19 @@ private String EmployeeNo;
         //</editor-fold>
 
         /* Create and display the form */
-       java.awt.EventQueue.invokeLater(new Runnable() {
-          public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 new FrmNewEmployee().setVisible(true);
             }
         });
-   }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnClose1;
+    private javax.swing.JButton btnClose2;
+    private javax.swing.JButton btnClose3;
+    private javax.swing.JButton btnClose4;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblBasicSalary;
     private javax.swing.JLabel lblBirthday;

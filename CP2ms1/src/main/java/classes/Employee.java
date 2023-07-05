@@ -23,8 +23,11 @@ import com.opencsv.exceptions.CsvValidationException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
 
 public class Employee {
     
@@ -190,7 +193,7 @@ public class Employee {
     //Method for creating Employee File; this works when 'Employees.csv' does not exist
     public void CreateEmployeeFile(String CSVFilename) throws IOException {
         try (CSVWriter writer = new CSVWriter(new FileWriter(CSVFilename, true))) {
-            String[] headers = new String [7];
+            String[] headers = new String [19];
             headers[0] = "Employee #";
             headers[1] = "Last Name";
             headers[2] = "First Name";
@@ -242,26 +245,26 @@ public class Employee {
     }
     
     //Method for fetching Employee records from the CSV file to a default table model
-     public DefaultTableModel GetEmployeeRecords() throws FileNotFoundException, CsvValidationException, IOException{
-        String fileName = "Employees.csv";
-        CSVReader reader = new CSVReader(new FileReader(fileName));
-        String[] headers = reader.readNext();
+     public TableModel FetchEmployees(String csvFilename) throws IOException, CsvValidationException {
+        CSVReader reader = new CSVReader(new FileReader(csvFilename));
+            String[] headers = reader.readNext();
             String[] tableHeaders = new String[]{headers[0], headers[1], headers[2], headers[6], headers[7], headers[8], headers[9]};
-        DefaultTableModel employeeRecords = new DefaultTableModel(tableHeaders,0);
-        String[] line;
-        String[] tableRecords = new String[7];
-        while((line = reader.readNext()) != null){
-            tableRecords[0] = line[0];
-            tableRecords[1] = line[1];
-            tableRecords[2] = line[2];
-            tableRecords[3] = line[6];
-            tableRecords[4] = line[7];
-            tableRecords[5] = line[8];
-            tableRecords[6] = line[9];
-            employeeRecords.addRow(tableRecords);
-        }
-        return employeeRecords;
-    }
+            DefaultTableModel employeeRecords = new DefaultTableModel(tableHeaders, 0);
+            String[] line;
+            while ((line = reader.readNext()) != null) {
+                Object[] rowData = new Object[]{
+                        line[0],
+                        line[1],
+                        line[2],
+                        line[6],
+                        line[7],
+                        line[8],
+                        line[9]
+                };
+                employeeRecords.addRow(rowData);
+            }
+            return employeeRecords;
+}
      
      //Method for Viewing Employee Records
      public Employee GetEmployeeRecords(String EmployeeNo) throws FileNotFoundException, IOException, CsvValidationException{
@@ -290,6 +293,7 @@ public class Employee {
                 _clothingAllowance = employee[16];
                 _grossSemiMonthlyRate = employee[17];
                 _hourlyRate = employee[18]; 
+                break;
             }
         }
         return this;
@@ -348,10 +352,5 @@ public class Employee {
             new File(CSVFilename).delete();
             new File(tempFilename).renameTo(new File(CSVFilename));
         }
-    }
 
-    public TableModel FetchEmployees(String csvFilename) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-}
-
+    }}

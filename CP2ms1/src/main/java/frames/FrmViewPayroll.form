@@ -57,8 +57,8 @@
                                       </Group>
                                       <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                                       <Component id="lblNetMonthlySalary" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="txtNetMonthlySalary" min="-2" pref="111" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtNetMonthlySalary" min="-2" pref="140" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="lblPesos1" min="-2" max="-2" attributes="0"/>
                                   </Group>
